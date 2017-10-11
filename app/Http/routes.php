@@ -75,5 +75,28 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('query3', ['uses' => 'StudentController@query3']);
     Route::get('query4', ['uses' => 'StudentController@query4']);
 
+    /**
+     * orm
+     */
+    Route::get('orm1', ['uses' => 'StudentController@orm1']);
+    Route::get('orm2', ['uses' => 'StudentController@orm2']);
+    Route::get('orm3', ['uses' => 'StudentController@orm3']);
+    Route::get('orm4', ['uses' => 'StudentController@orm4']);
+
+    /**
+     * request
+     */
+    Route::get('request1', ['uses' => 'StudentController@request1']);
+
+    /**
+     * session
+     */
+    Route::get('session1', ['uses' => 'StudentController@session1']);
+    Route::get('session2', ['uses' => 'StudentController@session2']);
+
+    /**
+     * response
+     */
+    Route::get('response', ['uses' => 'StudentController@response']);
 });
 

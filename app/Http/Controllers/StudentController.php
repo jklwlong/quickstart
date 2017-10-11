@@ -1,7 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Student;
+use function foo\func;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class StudentController extends Controller
 {
@@ -89,4 +94,131 @@ class StudentController extends Controller
 
     }
 
+    /**
+     * orm操作数据库
+     */
+    public function orm1()
+    {
+//        查询全部
+//        $boo = Student::all();
+//        根据id查询
+//        $boo = Student::find(2);
+//        根据主键查询有则返回，无则抛错
+//        $boo = Student::findOrFail(6);
+//        $boo = Student::where('id', '>', 1)
+//            ->orderBy('age', 'desc')
+//            ->first();
+//        每次查n条
+//        echo '<pre>';
+//        Student::chunk(1, function ($boo){
+//            var_dump($boo);
+//        });
+//        $boo = Student::max('id');
+//        var_dump($boo);
+    }
+
+    public function orm2()
+    {
+//        $student = new Student();
+//        $student -> name = 'sean3';
+//        $student -> age = 21;
+//        $boo = $student->save();
+//        使用create增加数据
+//        $boo = Student::create(['name'=>'wo','age'=>12]);
+//        有则查询，无则新增
+//        $boo = Student::firstOrCreate(['name'=>'wo1']);
+//        有则查询，无则创建实例，可通过条用$boo->save()保存；
+//        $boo = Student::firstOrNew(['name'=>'wo1']);
+//        var_dump($boo);
+    }
+
+    public function orm3()
+    {
+//        $student = Student::find(2);
+//        $student->name = 'kt';
+//        $student->save();
+//        批量更新
+//        Student::where('id', '>', 1)->update(['age'=>40]);
+
+    }
+
+    public function orm4()
+    {
+//        $student = Student::find(2);
+//        $student->delete();
+//        主键删除,参数可以为数组[]批量删除
+//        Student::destroy(3);
+//        按条件删除
+//        Student::where('id', '>', 6)->delete();
+    }
+
+    /**
+     * 表单request
+     */
+    public function request1(Request $request)
+    {
+//        echo $request->input('name');
+//        获取所有参数
+//        $res = $request->all();
+//        获取请求类型
+//        $request->method();
+//        判断请求类型
+//        $request->isMethod('get');
+//        获取当前url方法
+//        $request->url();
+    }
+
+    /**
+     * session
+     */
+    public function session1(Request $request)
+    {
+//        1.用request操作session
+//        $request->session()->put('key1','value1');
+//        2.辅助函数session()
+//        session()->put('key2','value2');
+//        3.Session 参数可为数组['key'=>'value']
+//        Session::put('key3','value3');
+//        存入数组
+//        Session::push('key4','a1');
+//        Session::push('key4','a2');
+//        判断key是否存在
+//        Session::has('key11');
+//        删除key
+//        Session::forget('key1');
+//        清空session
+//        Session::flush();
+//        暂存，只能取一次
+//        Session::flash('key-flash', 'value-flash');
+    }
+
+    public function session2(Request $request)
+    {
+//        echo $request->session()->get('key1');
+//        echo $request->session()->get('key2');
+//        echo Session::get('key3');
+//        若key不存在则为默认值
+//        echo Session::get('key4','default');
+//        取出一次后删掉session
+//        var_dump(Session::pull('key4','default'));
+//        取出所有session
+//        var_dump(Session::all());
+//        echo Session::get('key-flash');
+    }
+
+    /**
+     * response
+     */
+    public function response()
+    {
+//        $data = [
+//            'errorCode' => 0,
+//            'errorMsg' => 'success',
+//            'data' => 'sean',
+//        ];
+//        return response()->json($data);
+//        快闪数据只能用一次
+//        return redirect('session2')->with('msg','快闪数据');
+//        return redirect()->back();
+    }
 }
