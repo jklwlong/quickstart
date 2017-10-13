@@ -98,5 +98,23 @@ Route::group(['middleware' => ['web']], function () {
      * response
      */
     Route::get('response', ['uses' => 'StudentController@response']);
+
+
+    /**
+     * 中间件
+     * act
+     */
+    Route::get('act0', ['uses' => 'StudentController@act0']);
+    Route::group(['middleware' => ['act']], function () {
+        Route::get('act1', ['uses' => 'StudentController@act1']);
+        Route::get('act2', ['uses' => 'StudentController@act2']);
+    });
+
+    /**
+     * 表单
+     */
+    Route::get('studentList', ['uses' => 'StudentController@studentList']);
+    Route::post('studentSave', ['uses' => 'StudentController@studentSave']);
+
 });
 

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Student;
+use Dotenv\Validator;
 use function foo\func;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -220,5 +221,61 @@ class StudentController extends Controller
 //        快闪数据只能用一次
 //        return redirect('session2')->with('msg','快闪数据');
 //        return redirect()->back();
+    }
+
+
+    /**
+     * 前置拦截
+     */
+    public function act0()
+    {
+        return "即将开始";
+    }
+
+    public function act1()
+    {
+        return "ing1";
+    }
+
+    public function act2()
+    {
+        return "ing2";
+    }
+
+    /**
+     * 表单
+     */
+    public function studentList()
+    {
+        $studentList = Student::paginate(20);
+        return view('student.index', ['studentList'=> $studentList]);
+    }
+
+    public function studentSave(Request $request)
+    {
+//        $this->validate($request, [
+//            'Student.name' => 'required|min:2|max:20'
+//        ], [
+//            'required' => ':attribute必填',
+//            'min' => ':attribute长度最少为2'
+//        ], [
+//            'Student.name' => '姓名'
+//        ]);
+        $validator = \Validator::make($request->input(),[
+            'Student.name' => 'required|min:2|max:20'
+        ], [
+            'required' => ':attribute必填',
+            'min' => ':attribute长度最少为2'
+        ], [
+            'Student.name' => '姓名'
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $data = $request->input('Student');
+        $student = new Student();
+        $student->name = $data['name'];
+        $student->save();
+        return redirect('studentList');
     }
 }
