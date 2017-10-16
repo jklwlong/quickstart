@@ -115,6 +115,7 @@ Route::group(['middleware' => ['web']], function () {
      */
     Route::get('studentList', ['uses' => 'StudentController@studentList']);
     Route::post('studentSave', ['uses' => 'StudentController@studentSave']);
+    Route::any('student/delete/{id}', ['uses' => 'StudentController@studentDelete']);
 
 });
 

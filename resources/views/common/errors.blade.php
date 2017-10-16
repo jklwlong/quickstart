@@ -12,3 +12,11 @@
         </ul>
     </div>
 @endif
+@if (Session::has('success'))
+    <!-- Form Error List -->
+    <div class="alert alert-success">
+        <ul>
+            {{ Session::get('success') }}
+        </ul>
+    </div>
+@endif

@@ -270,12 +270,23 @@ class StudentController extends Controller
             'Student.name' => '姓名'
         ]);
         if($validator->fails()){
+//            withInput实现数据保持
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $data = $request->input('Student');
         $student = new Student();
         $student->name = $data['name'];
         $student->save();
-        return redirect('studentList');
+        return redirect('studentList')->with('success', '新增成功-');
+    }
+
+    public function studentDelete($id)
+    {
+        $student = Student::find($id);
+        if ($student->delete()) {
+            return redirect('studentList')->with('success', '删除成功-' . $id);
+        } else {
+            return redirect('studentList')->with('error', '删除失败-' . $id);
+        }
     }
 }

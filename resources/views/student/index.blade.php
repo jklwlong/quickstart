@@ -49,25 +49,22 @@
                     <div class="panel-body">
                         <table class="table table-striped task-table">
                             <thead>
-                            <th>Task</th>
-                            <th>&nbsp;</th>
+                            <th>id</th>
+                            <th>姓名</th>
+                            <th>创建时间</th>
                             </thead>
                             <tbody>
                             @foreach ($studentList as $student)
                                 <tr>
                                     <td class="table-text"><div>{{ $student->id }}</div></td>
                                     <td class="table-text"><div>{{ $student->name }}</div></td>
-                                    <td class="table-text"><div>{{ $student->created_at }}</div></td>
-                                    <!-- Task Delete Button -->
+                                    <td class="table-text"><div>{{ date_format($student->created_at,'Y-m-d') }}</div></td>
                                     <td>
-                                        <form action="{{ url('task/'.$student->id) }}" method="POST">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-
-                                            <button type="submit" class="btn btn-danger">
-                                                <i class="fa fa-btn fa-trash"></i>Delete
-                                            </button>
-                                        </form>
+                                        <a class="btn btn-danger"
+                                           href="{{ url('student/delete',['id'=>$student->id]) }}"
+                                           onclick="if(confirm('确定删除吗？')==false) return false;">
+                                            <i class="fa fa-btn fa-trash"></i>Delete
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
