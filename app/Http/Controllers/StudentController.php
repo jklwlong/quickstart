@@ -6,6 +6,7 @@ use Dotenv\Validator;
 use function foo\func;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -247,7 +248,7 @@ class StudentController extends Controller
      */
     public function studentList()
     {
-        $studentList = Student::paginate(20);
+        $studentList = Student::paginate(5);
         return view('student.index', ['studentList'=> $studentList]);
     }
 
@@ -287,6 +288,20 @@ class StudentController extends Controller
             return redirect('studentList')->with('success', '删除成功-' . $id);
         } else {
             return redirect('studentList')->with('error', '删除失败-' . $id);
+        }
+    }
+
+    public function send()
+    {
+        $name = 'ohay';
+        $flag = Mail::send('auth.emails.test', ['name' => $name], function ($message) {
+            $to = '415465852@qq.com';
+            $message->to($to)->subject('测试邮件');
+        });
+        if ($flag) {
+            echo '发送邮件成功，请查收！';
+        } else {
+            echo '发送邮件失败，请重试！';
         }
     }
 }

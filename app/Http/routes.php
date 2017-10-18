@@ -117,5 +117,16 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('studentSave', ['uses' => 'StudentController@studentSave']);
     Route::any('student/delete/{id}', ['uses' => 'StudentController@studentDelete']);
 
+    /**
+     * 邮件测试
+     */
+    Route::any('send', ['uses' => 'StudentController@send']);
+
+    /**
+     * auth
+     */
+    Route::auth();
+    Route::get('/home', 'HomeController@index');
+
 });
 
