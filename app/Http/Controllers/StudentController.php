@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -291,17 +292,52 @@ class StudentController extends Controller
         }
     }
 
+    /**
+     * 邮件测试
+     */
     public function send()
     {
-        $name = 'ohay';
-        $flag = Mail::send('auth.emails.test', ['name' => $name], function ($message) {
-            $to = '415465852@qq.com';
-            $message->to($to)->subject('测试邮件');
-        });
-        if ($flag) {
-            echo '发送邮件成功，请查收！';
-        } else {
-            echo '发送邮件失败，请重试！';
-        }
+//        文本邮件
+//        Mail::raw('邮件内容测试',function ($message) {
+//            $message->from('j******g@163.com','ohay');
+//            $message->subject('主题');
+//            $message->to('4*****2@qq.com');
+//        });
+//        html邮件
+//        $flag = Mail::send('auth.emails.test', ['name' => 'ohay'], function ($message) {
+//            $message->to('4****2@qq.com')->subject('测试邮件');
+//        });
+//        if ($flag) {
+//            echo '发送邮件成功，请查收！';
+//        } else {
+//            echo '发送邮件失败，请重试！';
+//        }
     }
+
+    /**
+     * 上传测试
+     */
+    public function upload(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $file = $request->file('file');
+//            判断文件是否上传成功
+            if ($file->isValid()) {
+//                原文件名
+                $file->getClientOriginalName();
+//                扩展名
+                $ext = $file->getClientOriginalExtension();
+//                mimetype
+                $file->getClientMimeType();
+//                临时绝对路径
+                $realpath = $file->getRealPath();
+                $filename = date('Y-m-d-h-i-s').'-'.uniqid().'.'.$ext;
+                $bool = Storage::disk('uploads')->put($filename, file_get_contents($realpath));
+                var_dump($bool);
+                exit;
+            }
+        }
+        return view('student.upload');
+    }
+
 }

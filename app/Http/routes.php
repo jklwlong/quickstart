@@ -123,6 +123,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::any('send', ['uses' => 'StudentController@send']);
 
     /**
+     * 上传测试
+     */
+    Route::any('upload', ['uses' => 'StudentController@upload']);
+
+    /**
      * auth
      */
     Route::auth();
