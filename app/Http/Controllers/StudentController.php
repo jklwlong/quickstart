@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Jobs\SendEmail;
 use App\Student;
 use Dotenv\Validator;
 use function foo\func;
@@ -376,5 +377,13 @@ class StudentController extends Controller
         Log::info("------------info");
         Log::warning("------------warning");
         Log::error("------------error",['name'=>'name', 'age'=>18]);
+    }
+
+    /**
+     * 队列
+     */
+    public function queue()
+    {
+        dispatch(new SendEmail('415465852@qq.com'));
     }
 }

@@ -143,5 +143,10 @@ Route::group(['middleware' => ['web']], function () {
      * debug
      */
     Route::any('error', 'StudentController@error');
+
+    /**
+     * 队列
+     */
+    Route::any('queue', 'StudentController@queue');
 });
 
