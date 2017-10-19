@@ -133,5 +133,15 @@ Route::group(['middleware' => ['web']], function () {
     Route::auth();
     Route::get('/home', 'HomeController@index');
 
+    /**
+     * 缓存
+     */
+    Route::any('cache1', 'StudentController@cache1');
+    Route::any('cache2', 'StudentController@cache2');
+
+    /**
+     * debug
+     */
+    Route::any('error', 'StudentController@error');
 });
 

@@ -5,7 +5,9 @@ use App\Student;
 use Dotenv\Validator;
 use function foo\func;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -340,4 +342,39 @@ class StudentController extends Controller
         return view('student.upload');
     }
 
+
+    /**
+     * 缓存
+     */
+    public function cache1()
+    {
+//        Cache::put('key1','value1',10);
+//        若key存在则失败，key不存在则成功
+//        Cache::add('key1','value1',10);
+//        永久保存
+//        Cache::forever('key2','value2');
+//        判断是否存在
+//        Cache::has('key1');
+    }
+
+    public function cache2()
+    {
+//        取出缓存
+//        $val = Cache::get('key1');
+//        取出缓存后删除
+//        Cache::pull('key1');
+//        var_dump($val);
+//        删除缓存，返回boolean值，若key存在返回true，若key不存在返回false
+        Cache::forget('key1');
+    }
+
+    /**
+     * debug
+     */
+    public function error()
+    {
+        Log::info("------------info");
+        Log::warning("------------warning");
+        Log::error("------------error",['name'=>'name', 'age'=>18]);
+    }
 }
